@@ -1,0 +1,37 @@
+h1{
+   margin-bottom: 40px; background-color: red; text-align: center; color: rgb(119, 226, 43);
+}
+h2{
+    background-color: rgb(65, 16, 16); text-align: center; color: rgb(203, 240, 83);
+}
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    background-color: rgb(28, 28, 71); 
+}
+.media-section {
+    margin-bottom: 60px;
+}
+
+.media-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.video, .image {
+    width: 200px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+img {
+    width: 50%;
+    height: auto;
+    border-radius: 4px;
+}
