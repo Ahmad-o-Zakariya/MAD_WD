@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selectors</title>
+    <style>
+        /*elemental selector*/
+        div{
+            background-color: red;
+        }
+        /*Class selector*/
+        .red{
+            background-color: burlywood;
+        }
+        /*Id selector*/
+        #green{
+            background-color: green;
+        }
+
+        /*Child selector*/
+        div > p{
+            color: blue;
+            background-color: brown;
+        }
+        /*Universal Selector*/
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        /*Psuedo Selector*/
+        a:visited{
+            color: yellow;
+        }
+        a:link{
+            color: red;
+        }
+        a:active{
+            color:bisque;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        I am a div. 
+    </div>
+    <a href="https://www.google.com">Go To Google</a>
+    <div id="green">
+        Hello.
+    </div>
+    <div class="red">
+        I am another div
+        <p>I am a para</p>
+    </div>
+</body>
+</html>
