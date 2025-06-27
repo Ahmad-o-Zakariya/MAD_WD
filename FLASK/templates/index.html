@@ -2,7 +2,34 @@
 {% block body%}
 
 <div class="container my-3">
-    <h2>Add a ToDo</h2>
+    <!-- Hero Welcome and Badges -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h2>Welcome Back, Hero!</h2>
+            <span class="badge-box">🎖️ Level {{ level }}</span>
+            <span class="badge-box">🔥 Streak: {{ streak }} Days</span>
+            <span class="badge-box">⭐ XP: {{ xp }}</span>
+        </div>
+    </div>
+
+    <!-- Character Profile Card -->
+    <div class="profile-box mt-3">
+        <h4>🧑 Class: Warrior</h4>
+        <p>⭐ XP: {{ xp }}</p>
+        <p>🎖️ Level: {{ level }}</p>
+        <p>🔥 Streak: {{ streak }} days</p>
+    </div>
+
+<br>
+<h4>Achievements</h4>
+
+<div>
+    {% for badge in achievements %}
+        <span class="badge-box">{{ badge }}</span>
+    {% endfor %}
+</div>
+ <h2 class="mt-4">Add a ToDo</h2>
+
     <form action="/" method="post">
         <div class="mb-3">
             <label for="title" class="form-label">ToDo Title</label>
@@ -14,6 +41,8 @@
             <input type="text" class="form-control" name="desc" id="desc">
         </div>
         <button type="submit" class="btn btn-dark">Submit</button>
+        
+
     </form>
 </div>
 <div class="container my-3">
@@ -36,16 +65,22 @@
         </thead>
         <tbody>
             {% for todo in allTodo %}
-            <tr>
+            <tr class="{% if todo.is_done %}completed{% endif %}">
                 <th scope="row">{{loop.index}}</th>
                 <td>{{todo.title}}</td>
                 <td>{{todo.desc}}</td>
                 <td>{{todo.date_created}}</td>
                 <td>
-                    <a href="/update/{{todo.SNo}}" type="button"
-                        class="btn btn-outline-dark btn-sm mx-1">Update</button>
-                        <a href="/delete/{{todo.SNo}}" type="button"
-                            class="btn btn-outline-dark btn-sm mx-1">Delete</button>
+    {% if not todo.is_done %}
+        <a href="/complete/{{ todo.SNo }}" class="btn btn-success btn-sm mx-1">Complete</a>
+    {% endif %}
+    <a href="/update/{{todo.SNo}}" class="btn btn-outline-dark btn-sm mx-1">Update</a>
+    <a href="/delete/{{todo.SNo}}" class="btn btn-outline-danger btn-sm mx-1">Delete</a>
+                            <span class="badge-box">+10 XP</span>
+                            <span class="badge-box" style="background-color: {{ 'green' if todo.difficulty == 'Easy' else 'orange' if todo.difficulty == 'Medium' else 'red' }}">
+    {{ todo.difficulty }}
+</span>
+
                 </td>
             </tr>
             {% endfor %}
@@ -65,4 +100,5 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
 
-{% endblock body%}
+
+    {% endblock body%}
