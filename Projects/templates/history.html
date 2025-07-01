@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>History</title>
+</head>
+<body>
+  <h2>Recent Generations</h2>
+  {% for g in generations %}
+    <div style="margin-bottom: 20px;">
+      <strong>{{ g.genre }} ({{ g.word_count }} words)</strong><br>
+      <small>{{ g.timestamp.strftime('%Y-%m-%d %H:%M') }}</small>
+      <p>{{ g.content }}</p>
+      <hr>
+    </div>
+  {% else %}
+    <p>No history yet.</p>
+  {% endfor %}
+  <a href="/">⬅️ Back to Generator</a>
+</body>
+</html>
