@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Contact Form</title>
+</head>
+<body style="font-family: 'Courier New', monospace; background-color: black; color: #00FF00; padding: 20px; text-align: center;">
+
+<h1 style="text-shadow: 0 0 10px #00FF00;">🕹 Retro Contact Form 🕹</h1>
+
+<form id="contactForm" 
+      style="background-color: #111; padding: 20px; border: 4px solid #00FF00; border-radius: 10px; max-width: 500px; margin: auto; box-shadow: 0 0 20px #00FF00; text-align: left;">
+    
+    <fieldset style="border: 2px solid #00FF00; padding: 15px; margin-bottom: 15px;">
+        <legend style="color: #00FF00; font-weight: bold;">Personal Information</legend>
+
+        <label for="name">Full Name:</label><br>
+        <input type="text" id="name" name="name" required 
+               style="width: 100%; padding: 8px; background-color: black; color: #00FF00; border: 2px solid #00FF00; margin-bottom: 10px; font-family: 'Courier New', monospace;">
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required 
+               style="width: 100%; padding: 8px; background-color: black; color: #00FF00; border: 2px solid #00FF00; margin-bottom: 10px; font-family: 'Courier New', monospace;">
+
+        <label for="dob">Date of Birth:</label><br>
+        <input type="date" id="dob" name="dob" required 
+               style="width: 100%; padding: 8px; background-color: black; color: #00FF00; border: 2px solid #00FF00; margin-bottom: 10px; font-family: 'Courier New', monospace;">
+    </fieldset>
+
+    <fieldset style="border: 2px solid #00FF00; padding: 15px;">
+        <legend style="color: #00FF00; font-weight: bold;">Contact Preferences</legend>
+
+        <label for="country">Country:</label><br>
+        <select id="country" name="country" required 
+                style="width: 100%; padding: 8px; background-color: black; color: #00FF00; border: 2px solid #00FF00; margin-bottom: 10px; font-family: 'Courier New', monospace;">
+            <option value="">--Select Country--</option>
+            <option value="India">India</option>
+            <option value="USA">United States</option>
+            <option value="UK">United Kingdom</option>
+            <option value="Australia">Australia</option>
+        </select>
+
+        <p>Preferred Contact Method:</p>
+        <input type="radio" id="contact-email" name="contact_method" value="Email" required>
+        <label for="contact-email">Email</label>
+
+        <input type="radio" id="contact-phone" name="contact_method" value="Phone">
+        <label for="contact-phone">Phone</label>
+    </fieldset>
+
+    <br>
+    <input type="submit" value="▶ Submit" 
+           style="background-color: black; color: #00FF00; padding: 10px 20px; border: 3px solid #00FF00; border-radius: 5px; cursor: pointer; font-weight: bold; font-family: 'Courier New', monospace; text-shadow: 0 0 10px #00FF00; box-shadow: 0 0 15px #00FF00;">
+</form>
+
+<script>
+// Load previous submissions from localStorage
+let submissions = JSON.parse(localStorage.getItem('formSubmissions')) || [];
+
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Get form data
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const dob = document.getElementById('dob').value;
+    const country = document.getElementById('country').value;
+    const contactMethod = document.querySelector('input[name="contact_method"]:checked').value;
+
+    // New entry
+    const newEntry = 
+`Full Name: ${name}
+Email: ${email}
+Date of Birth: ${dob}
+Country: ${country}
+Preferred Contact Method: ${contactMethod}
+----------------------`;
+
+    submissions.push(newEntry);
+    localStorage.setItem('formSubmissions', JSON.stringify(submissions));
+
+    const textContent = submissions.join('\n');
+
+    const blob = new Blob([textContent], { type: 'text/plain' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'form_submissions.txt';
+    link.click();
+
+    this.reset();
+});
+</script>
+
+</body>
+</html>
